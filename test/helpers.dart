@@ -20,3 +20,14 @@ class _ExceptionMatcher extends Matcher {
 void expectThrow(Function() actual, String message) {
   expect(actual, throwsA(_ExceptionMatcher(message)));
 }
+
+extension IterableExtencions<T> on Iterable<T> {
+  T? firstWhereOrNull(bool Function(T) predicate) {
+    for (final t in this) {
+      if (predicate(t)) {
+        return t;
+      }
+    }
+    return null;
+  }
+}

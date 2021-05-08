@@ -1,15 +1,25 @@
 import 'package:json_lib/json_lib.dart';
 import 'package:json_lib/json_lib_extensions.dart';
 
+import 'helpers.dart';
+
+enum Genre { Rock, Jazz, Pop, Folk }
+
+Genre? tryParseGenre(dynamic value) {
+  return Genre.values.firstWhereOrNull((e) => e.toString().toLowerCase() == 'genre.${value.toString().toLowerCase()}');
+}
+
 class Album {
   final String name;
   final Artist artist;
   final List<Track> tracks;
+  final Genre? genre;
 
   Album({
     required this.name,
     required this.artist,
     required this.tracks,
+    required this.genre,
   });
 
   static Album deserialize(dynamic data) {
@@ -18,6 +28,7 @@ class Album {
       name: json.value('name'),
       artist: json.value('artist', Artist.deserialize),
       tracks: json.valueList('tracks', Track.deserialize),
+      genre: json.value('genre', tryParseGenre),
     );
   }
 }

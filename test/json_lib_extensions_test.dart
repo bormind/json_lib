@@ -3,6 +3,7 @@ import 'package:test/test.dart';
 
 import 'helpers.dart';
 import 'json.dart';
+import 'models.dart';
 
 void main() {
   group('Can read json', () {
@@ -28,6 +29,8 @@ void main() {
     test('Can read json path', () {
       expect(albumsJson.pathValue([1, 'name']), 'Songs from a Room');
       expect(albumsJson.pathValue([1, 'tracks', 0, 'duration']), 208);
+      expect(albumsJson.pathValue([1, 'tracks', 0, 'duration']), 208);
+      expect(albumsJson.pathValue([1, 'genre'], tryParseGenre), Genre.Folk);
     });
 
     test('Can handle invalid path values', () {

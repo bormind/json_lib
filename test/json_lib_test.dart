@@ -34,6 +34,7 @@ void main() {
     test('Can read json path', () {
       expect(jsonPathValue([1, 'name'], albumsJson), 'Songs from a Room');
       expect(jsonPathValue([1, 'tracks', 0, 'duration'], albumsJson), 208);
+      expect(jsonPathValue([1, 'genre'], albumsJson, tryParseGenre), Genre.Folk);
     });
 
     test('Can handle invalid path values', () {

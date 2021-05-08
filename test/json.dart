@@ -1,6 +1,7 @@
 final albumsJson = [
   {
     'name': 'How To Live Forever',
+    'genre': 'Rock',
     'artist': {
       'name': 'Michael Forrest',
       'founded': 1982,
@@ -12,6 +13,7 @@ final albumsJson = [
   },
   {
     'name': 'Songs from a Room',
+    'genre': 'Folk',
     'artist': {
       'name': 'Leonard Cohen',
     },
