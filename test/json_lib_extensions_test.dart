@@ -14,10 +14,10 @@ void main() {
       expect(simpleJson.value('stringField'), 'foo');
       expect(simpleJson.value('doubleField'), 2.3);
 
-      expect(simpleJson.valueOptional('doubleField'), 2.3);
-      expect(simpleJson.valueOptional('stringField'), 'foo');
-      expect(simpleJson.valueOptional('nullField'), null);
-      expect(simpleJson.valueOptional('missingField'), null);
+      expect(simpleJson.tryValue('doubleField'), 2.3);
+      expect(simpleJson.tryValue('stringField'), 'foo');
+      expect(simpleJson.tryValue('nullField'), null);
+      expect(simpleJson.tryValue('missingField'), null);
     });
 
     test('Can read Jason List Item by index', () {
@@ -40,7 +40,7 @@ void main() {
 
       expectThrow(() {
         albumsJson.pathValue([1, 'tracks', 10, 'duration']);
-      }, 'Value at path [1, tracks, 10] is not found. Use Optional version of the function if value could be missing');
+      }, 'Value at path [1, tracks, 10] is not found. Use "try" prefixed version of the function if value could be missing');
 
       expectThrow(() {
         albumsJson.pathValue([1, 3]);
@@ -52,11 +52,11 @@ void main() {
 
       expectThrow(() {
         simpleJson.value('nullField');
-      }, 'Value "nullField" is not found. Use Optional version of the function if value could be missing');
+      }, 'Value "nullField" is not found. Use "try" prefixed version of the function if value could be missing');
 
       expectThrow(() {
         simpleJson.value('missingField');
-      }, 'Value "missingField" is not found. Use Optional version of the function if value could be missing');
+      }, 'Value "missingField" is not found. Use "try" prefixed version of the function if value could be missing');
     });
   });
 }

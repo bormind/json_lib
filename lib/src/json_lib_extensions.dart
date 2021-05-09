@@ -5,7 +5,7 @@ extension JsonMapExtensions on Map<String, dynamic> {
     return json_lib.jsonPathValue(path, this, valueMapper);
   }
 
-  T? pathValueOptional<T>(List<dynamic> path, [T Function(dynamic)? valueMapper]) {
+  T? tryPathValue<T>(List<dynamic> path, [T Function(dynamic)? valueMapper]) {
     return json_lib.jsonPathValueOptional<T>(path, this, valueMapper);
   }
 
@@ -13,19 +13,19 @@ extension JsonMapExtensions on Map<String, dynamic> {
     return json_lib.jsonValue(fieldName, this, valueMapper);
   }
 
-  T? valueOptional<T>(
+  T? tryValue<T>(
     String fieldName, [
     T Function(dynamic)? valueMapper,
   ]) {
-    return json_lib.jsonValueOptional(fieldName, this, valueMapper);
+    return json_lib.tryJsonValue(fieldName, this, valueMapper);
   }
 
   List<T> valueList<T>(String fieldName, [T Function(dynamic)? listItemMapper]) {
     return json_lib.jsonValueList(fieldName, this, listItemMapper);
   }
 
-  List<T>? valueListOptional<T>(String fieldName, [T Function(dynamic)? listItemMapper]) {
-    return json_lib.jsonValueListOptional(fieldName, this, listItemMapper);
+  List<T>? tryValueList<T>(String fieldName, [T Function(dynamic)? listItemMapper]) {
+    return json_lib.tryJsonValueList(fieldName, this, listItemMapper);
   }
 }
 
@@ -34,7 +34,7 @@ extension JsonListExtensions on List<dynamic> {
     return json_lib.jsonPathValue(path, this, valueMapper);
   }
 
-  T? pathValueOptional<T>(List<dynamic> path, [T Function(dynamic)? valueMapper]) {
+  T? tryPathValue<T>(List<dynamic> path, [T Function(dynamic)? valueMapper]) {
     return json_lib.jsonPathValueOptional<T>(path, this, valueMapper);
   }
 
@@ -42,7 +42,7 @@ extension JsonListExtensions on List<dynamic> {
     return json_lib.jsonListItem(index, this, listItemMapper);
   }
 
-  T? listItemOptional<T>(int index, [T Function(dynamic)? listItemMapper]) {
-    return json_lib.jsonListItemOptional(index, this, listItemMapper);
+  T? tryListItem<T>(int index, [T Function(dynamic)? listItemMapper]) {
+    return json_lib.tryJsonListItem(index, this, listItemMapper);
   }
 }

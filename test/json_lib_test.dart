@@ -13,11 +13,17 @@ void main() {
       expect(jsonValue('intField', simpleJson), 5);
       expect(jsonValue('stringField', simpleJson), 'foo');
       expect(jsonValue('doubleField', simpleJson), 2.3);
+      expectThrow(() {
+        jsonValue('nullField', simpleJson);
+      }, 'Value "nullField" is not found. Use "try" prefixed version of the function if value could be missing');
+      expectThrow(() {
+        jsonValue('missingField', simpleJson);
+      }, 'Value "missingField" is not found. Use "try" prefixed version of the function if value could be missing');
 
-      expect(jsonValueOptional('doubleField', simpleJson), 2.3);
-      expect(jsonValueOptional('stringField', simpleJson), 'foo');
-      expect(jsonValueOptional('nullField', simpleJson), null);
-      expect(jsonValueOptional('missingField', simpleJson), null);
+      expect(tryJsonValue('doubleField', simpleJson), 2.3);
+      expect(tryJsonValue('stringField', simpleJson), 'foo');
+      expect(tryJsonValue('nullField', simpleJson), null);
+      expect(tryJsonValue('missingField', simpleJson), null);
     });
 
     test('Can convert json list to list', () {
@@ -44,23 +50,11 @@ void main() {
 
       expectThrow(() {
         jsonPathValue([1, 'tracks', 10, 'duration'], albumsJson);
-      }, 'Value at path [1, tracks, 10] is not found. Use Optional version of the function if value could be missing');
+      }, 'Value at path [1, tracks, 10] is not found. Use "try" prefixed version of the function if value could be missing');
 
       expectThrow(() {
         jsonPathValue([1, 3], albumsJson);
       }, 'Jason data is a Map but path value 3 is not a String. Only string values accepted as a json map keys');
-    });
-
-    test('Can catch value not found error', () {
-      final simpleJson = {'intField': 5, 'stringField': 'foo', 'doubleField': 2.3, 'nullField': null};
-
-      expectThrow(() {
-        jsonValue('nullField', simpleJson);
-      }, 'Value "nullField" is not found. Use Optional version of the function if value could be missing');
-
-      expectThrow(() {
-        jsonValue('missingField', simpleJson);
-      }, 'Value "missingField" is not found. Use Optional version of the function if value could be missing');
     });
 
     test('Can deserialize nested Json Data', () {

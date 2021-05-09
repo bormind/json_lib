@@ -5,17 +5,18 @@ Type _typeOf<T>() => T;
 String _formatValueNotFoundMessage(List<dynamic> path) {
   String errorMessage;
   if (path.length > 1) {
-    errorMessage = 'Value at path $path is not found. Use Optional version of the function if value could be missing';
+    errorMessage =
+        'Value at path $path is not found. Use "try" prefixed version of the function if value could be missing';
   } else if (path.length == 1) {
     if (path.first is int) {
       errorMessage =
-          'Value at index ${path.first} is not found or index is out of bounds. Use Optional version of the function if value could be missing';
+          'Value at index ${path.first} is not found or index is out of bounds. Use "try" prefixed version of the function if value could be missing';
     } else {
       errorMessage =
-          'Value "${path.first}" is not found. Use Optional version of the function if value could be missing';
+          'Value "${path.first}" is not found. Use "try" prefixed version of the function if value could be missing';
     }
   } else {
-    errorMessage = 'Value is not found. Use Optional version of the function if value could be missing';
+    errorMessage = 'Value is not found. Use "try" prefixed version of the function if value could be missing';
   }
 
   return errorMessage;
@@ -144,7 +145,7 @@ T jsonValue<T>(String fieldName, dynamic data, [T Function(dynamic)? valueMapper
   return jsonPathValue(<dynamic>[fieldName], data, valueMapper);
 }
 
-T? jsonValueOptional<T>(
+T? tryJsonValue<T>(
   String fieldName,
   dynamic data, [
   T Function(dynamic)? valueMapper,
@@ -158,7 +159,7 @@ List<T> jsonValueList<T>(String fieldName, dynamic data, [T Function(dynamic)? l
   return asJsonList(listVal, listItemMapper);
 }
 
-List<T>? jsonValueListOptional<T>(String fieldName, dynamic data, [T Function(dynamic)? listItemMapper]) {
+List<T>? tryJsonValueList<T>(String fieldName, dynamic data, [T Function(dynamic)? listItemMapper]) {
   final dynamic listVal = jsonPathValueOptional<dynamic>(<dynamic>[fieldName], data);
   return listVal == null ? null : asJsonList(listVal, listItemMapper);
 }
@@ -167,6 +168,6 @@ T jsonListItem<T>(int index, dynamic data, [T Function(dynamic)? listItemMapper]
   return jsonPathValue(<dynamic>[index], data, listItemMapper);
 }
 
-T? jsonListItemOptional<T>(int index, dynamic data, [T Function(dynamic)? listItemMapper]) {
+T? tryJsonListItem<T>(int index, dynamic data, [T Function(dynamic)? listItemMapper]) {
   return jsonPathValueOptional(<dynamic>[index], data, listItemMapper);
 }

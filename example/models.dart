@@ -37,8 +37,8 @@ class Artist {
     final json = asJsonMap(data);
     return Artist(
       name: json.value('name'),
-      founded: json.valueOptional('founded'),
-      members: json.valueListOptional('members') ?? [],
+      founded: json.tryValue('founded'),
+      members: json.tryValueList('members') ?? [],
     );
   }
 }
@@ -56,7 +56,7 @@ class Track {
     final json = asJsonMap(data);
     return Track(
       name: json.value('name'),
-      duration: json.valueOptional('duration'),
+      duration: json.tryValue('duration'),
     );
   }
 }
